@@ -1,0 +1,119 @@
+module ledgroup (
+input clk,
+    // input r,g,b,
+    output reg ledLight,
+    output reg [4:0] cnt,
+    output reg led,
+  output reg [1:0] nowTH,
+output reg [1:0] nowTL,
+output reg aaaa
+);
+parameter r = 0;
+parameter g = 8'b11111111; // 01010101
+parameter b = 0;
+
+// 要傳輸0
+parameter T0H = 1; // 0.4us
+parameter T0L = 3;  // 0.85us
+// 要傳輸1
+parameter T1H = 2;  // 0.85us
+parameter T1L = 2;   // 0.4us
+
+// 除頻，因為LED燈，一個訊號要5次一個cycle
+// reg [2:0] freq;
+
+// 把g/r/b合併成一個24位元的值
+wire [23:0] Colors = 24'b010101010000000011111111;
+reg [23:0] merged_Color = 24'b010101010000000011111111;
+//  目前要觀察merged_Color 哪一位元 
+
+//
+// assign merged_Color
+
+// always@(*) begin
+reg tmo=0;  
+// end
+
+
+// 除頻
+// always@(clk)begin
+// if(freq[2])begin
+// freq<=0;
+// end
+// else begin
+// freq <= freq+1;
+// end
+// end
+  initial begin
+    // 在這裡設定初始值
+    cnt = -1;
+    // ledLight = 1;
+  end
+
+
+
+
+// // 每5個clk，會把cnt+1。cnt用來逐步確認 merged_Color 每一位元的值
+// always@(freq[2])begin
+
+
+// end
+
+// // 每次cnt變動，會檢查值
+// always @(cnt) begin
+
+// end
+// 每次 nowTH 與  nowTL變動，輸出電壓
+always @(posedge clk) begin
+
+// aaaa = merged_Color[0];
+
+  // else if(nowTH==0 && nowTL==0)begin
+  //   if(cnt==23)
+  //     begin 
+  //     cnt<=0;
+
+  //     end
+  //   else
+  //     begin
+  //       if(tmo==0)begin
+  //         cnt<=0;
+  //         tmo=tmo+1;
+  //       end
+  //       else begin
+  //       cnt<=cnt+1;
+  //       end
+  //     end
+  // end
+
+  if (merged_Color[0] == 0) begin
+    if (nowTH == 0 && nowTL == 0) begin
+      nowTH <= T1H;
+      nowTL <= T1L;
+      // ledLight = 1;
+    end
+    led=1;
+  end else if(merged_Color[0] == 1) begin
+    if (nowTH == 0 && nowTL == 0) begin
+      nowTH <= T0H;
+      nowTL <= T0L;
+      // ledLight = 0;
+    end
+    led=0;
+  end
+  
+  if (nowTH > 0) begin
+    ledLight = 1;
+    nowTH <= nowTH - 1;
+  end else if (nowTL > 0) begin
+    ledLight = 0;
+    nowTL <= nowTL - 1;
+  end
+  
+merged_Color=merged_Color<<1;
+if(merged_Color==0)merged_Color=Colors;
+
+end
+
+
+endmodule

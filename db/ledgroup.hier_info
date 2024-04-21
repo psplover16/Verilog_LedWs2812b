@@ -1,0 +1,63 @@
+|ledgroup
+clk => clk.IN1
+led <= <GND>
+ledLight <= ledgroup_detail:m1.ledLight
+
+
+|ledgroup|ledgroup_detail:m1
+clk => ledLight~reg0.CLK
+clk => nowTL[0].CLK
+clk => nowTL[1].CLK
+clk => nowTH[0].CLK
+clk => nowTH[1].CLK
+clk => merged_Color[0].CLK
+clk => merged_Color[1].CLK
+clk => merged_Color[2].CLK
+clk => merged_Color[3].CLK
+clk => merged_Color[4].CLK
+clk => merged_Color[5].CLK
+clk => merged_Color[6].CLK
+clk => merged_Color[7].CLK
+clk => merged_Color[8].CLK
+clk => merged_Color[9].CLK
+clk => merged_Color[10].CLK
+clk => merged_Color[11].CLK
+clk => merged_Color[12].CLK
+clk => merged_Color[13].CLK
+clk => merged_Color[14].CLK
+clk => merged_Color[15].CLK
+clk => merged_Color[16].CLK
+clk => merged_Color[17].CLK
+clk => merged_Color[18].CLK
+clk => merged_Color[19].CLK
+clk => merged_Color[20].CLK
+clk => merged_Color[21].CLK
+clk => merged_Color[22].CLK
+clk => merged_Color[23].CLK
+g[0] => merged_Color.DATAB
+g[1] => merged_Color.DATAB
+g[2] => merged_Color.DATAB
+g[3] => merged_Color.DATAB
+g[4] => merged_Color.DATAB
+g[5] => merged_Color.DATAB
+g[6] => merged_Color.DATAB
+g[7] => merged_Color.DATAB
+r[0] => merged_Color.DATAB
+r[1] => merged_Color.DATAB
+r[2] => merged_Color.DATAB
+r[3] => merged_Color.DATAB
+r[4] => merged_Color.DATAB
+r[5] => merged_Color.DATAB
+r[6] => merged_Color.DATAB
+r[7] => merged_Color.DATAB
+b[0] => merged_Color.DATAB
+b[1] => merged_Color.DATAB
+b[2] => merged_Color.DATAB
+b[3] => merged_Color.DATAB
+b[4] => merged_Color.DATAB
+b[5] => merged_Color.DATAB
+b[6] => merged_Color.DATAB
+b[7] => merged_Color.DATAB
+ledLight <= ledLight~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
